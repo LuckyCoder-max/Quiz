@@ -1,32 +1,42 @@
 ﻿<Window x:Class="Quiz.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Quiz Game" Height="500" Width="600" WindowStartupLocation="CenterScreen"
-        Background="#f0f0f0" >
-    <Grid Margin="10">
+        Title="Quiz Game"
+        Height="600" Width="800"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen">
+    <!--Icon="pack://application:,,,/Resources/quiz_icon.ico">-->
 
-        <StackPanel x:Name="QuizSelectionPanel" VerticalAlignment="Center" HorizontalAlignment="Center" Width="400">
-            <TextBlock Text="Выберите категорию викторины" FontSize="24" FontWeight="Bold" TextAlignment="Center" Margin="0 0 0 20"/>
-            <Button Content="Общее" Height="50" Margin="0 5" FontSize="18" Click="CategoryButton_Click"/>
-            <Button Content="IT" Height="50" Margin="0 5" FontSize="18" Click="CategoryButton_Click"/>
-            <Button Content="Математика" Height="50" Margin="0 5" FontSize="18" Click="CategoryButton_Click"/>
-        </StackPanel>
+    <Border Background="#1E1E2F" CornerRadius="20" BorderBrush="#444" BorderThickness="1" SnapsToDevicePixels="True">
+        <Grid>
+            <Rectangle Fill="#99000000"/>
 
-        <StackPanel x:Name="QuizPanel" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center" Width="500">
-            <TextBlock x:Name="QuestionText" FontSize="22" FontWeight="SemiBold" TextWrapping="Wrap" TextAlignment="Center" Margin="0 0 0 20"/>
+            <DockPanel Height="40" LastChildFill="False" Background="#222" VerticalAlignment="Top"
+                       MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
 
-            <UniformGrid Rows="2" Columns="2" Margin="0 0 0 20" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                <Button x:Name="AnswerButton1" FontSize="18" Margin="8" Padding="10" Click="AnswerButton_Click"/>
-                <Button x:Name="AnswerButton2" FontSize="18" Margin="8" Padding="10" Click="AnswerButton_Click"/>
-                <Button x:Name="AnswerButton3" FontSize="18" Margin="8" Padding="10" Click="AnswerButton_Click"/>
-                <Button x:Name="AnswerButton4" FontSize="18" Margin="8" Padding="10" Click="AnswerButton_Click"/>
-            </UniformGrid>
+                <TextBlock Text="Quiz Game" Foreground="White" VerticalAlignment="Center" Margin="10,0" FontSize="16" />
 
-            <TextBlock x:Name="FeedbackText" FontSize="16" Foreground="DarkRed" TextAlignment="Center" Margin="0 0 0 20"/>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                    <Button Content="—" Click="Minimize_Click" Style="{StaticResource WindowButtonStyle}" ToolTip="Свернуть" />
+                    <Button Content="❐" Click="Maximize_Click" Style="{StaticResource WindowButtonStyle}" ToolTip="Развернуть" />
+                    <Button Content="✕" Click="Close_Click" Style="{StaticResource WindowButtonStyle}" ToolTip="Закрыть" />
+                </StackPanel>
+            </DockPanel>
 
-            <Button x:Name="NextButton" Content="Следующий вопрос" Width="180" Height="40" HorizontalAlignment="Center" Visibility="Collapsed" Click="NextButton_Click"/>
-            <Button x:Name="RestartButton" Content="Вернуться к выбору" Width="180" Height="40" HorizontalAlignment="Center" Visibility="Collapsed" Margin="10 20 10 0" Click="RestartButton_Click"/>
-        </StackPanel>
+            <Border Background="#AA1E1E2F" CornerRadius="15" Padding="20" Margin="40,80,40,40">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="500">
+                    <TextBlock Text="Выберите категорию викторины" 
+                               FontSize="28" FontWeight="Bold" Foreground="White" 
+                               TextAlignment="Center" Margin="0 0 0 30"/>
 
-    </Grid>
+                    <Button Content="Общее" Click="CategoryButton_Click" Style="{StaticResource QuizButtonStyle}" />
+                    <Button Content="IT" Click="CategoryButton_Click" Style="{StaticResource QuizButtonStyle}" />
+                    <Button Content="Математика" Click="CategoryButton_Click" Style="{StaticResource QuizButtonStyle}" />
+                </StackPanel>
+            </Border>
+
+        </Grid>
+    </Border>
 </Window>
