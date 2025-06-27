@@ -43,92 +43,13 @@ namespace Quiz
         private int score = 0;
         private bool answered = false;
 
-        private StackPanel QuizPanel;
-        private TextBlock QuestionText;
-        private Button[] AnswerButtons = new Button[4];
-        private TextBlock FeedbackText;
-        private TextBlock ScoreText;
-        private Button NextButton;
-        private Button RestartButton;
+        private Button[] AnswerButtons;
+
 
         public MainWindow()
         {
             InitializeComponent();
-            InitializeQuizUI();
-        }
-
-        private void InitializeQuizUI()
-        {
-            QuizPanel = new StackPanel
-            {
-                VerticalAlignment = VerticalAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                Width = 500,
-                Visibility = Visibility.Collapsed
-            };
-
-            QuestionText = new TextBlock
-            {
-                FontSize = 24,
-                Foreground = Brushes.White,
-                TextAlignment = TextAlignment.Center,
-                Margin = new Thickness(0, 0, 0, 20),
-                TextWrapping = TextWrapping.Wrap
-            };
-            QuizPanel.Children.Add(QuestionText);
-
-            for (int i = 0; i < 4; i++)
-            {
-                var btn = new Button
-                {
-                    Style = (Style)FindResource("QuizButtonStyle"),
-                    Margin = new Thickness(0, 8, 0, 0)
-                };
-                btn.Click += AnswerButton_Click;
-                AnswerButtons[i] = btn;
-                QuizPanel.Children.Add(btn);
-            }
-
-            FeedbackText = new TextBlock
-            {
-                FontSize = 18,
-                Foreground = Brushes.White,
-                TextAlignment = TextAlignment.Center,
-                Margin = new Thickness(0, 15, 0, 0),
-                TextWrapping = TextWrapping.Wrap
-            };
-            QuizPanel.Children.Add(FeedbackText);
-
-            ScoreText = new TextBlock
-            {
-                FontSize = 16,
-                Foreground = Brushes.White,
-                TextAlignment = TextAlignment.Center,
-                Margin = new Thickness(0, 5, 0, 0)
-            };
-            QuizPanel.Children.Add(ScoreText);
-
-            NextButton = new Button
-            {
-                Content = "Следующий вопрос",
-                Style = (Style)FindResource("QuizButtonStyle"),
-                Margin = new Thickness(0, 10, 0, 0),
-                Visibility = Visibility.Collapsed
-            };
-            NextButton.Click += NextButton_Click;
-            QuizPanel.Children.Add(NextButton);
-
-            RestartButton = new Button
-            {
-                Content = "В начало",
-                Style = (Style)FindResource("QuizButtonStyle"),
-                Margin = new Thickness(0, 10, 0, 0),
-                Visibility = Visibility.Collapsed
-            };
-            RestartButton.Click += RestartButton_Click;
-            QuizPanel.Children.Add(RestartButton);
-
-            ((Grid)Content).Children.Add(QuizPanel);
+            AnswerButtons = new[] { AnswerButton0, AnswerButton1, AnswerButton2, AnswerButton3 };
         }
 
         private void CategoryButton_Click(object sender, RoutedEventArgs e)
@@ -138,6 +59,7 @@ namespace Quiz
                 currentCategory = btn.Content.ToString();
                 currentQuestionIndex = 0;
                 score = 0;
+                CategoryPanel.Visibility = Visibility.Collapsed;
                 ShowQuestion();
             }
         }
@@ -224,6 +146,7 @@ namespace Quiz
         private void RestartButton_Click(object sender, RoutedEventArgs e)
         {
             QuizPanel.Visibility = Visibility.Collapsed;
+            CategoryPanel.Visibility = Visibility.Visible;
             currentCategory = "";
             currentQuestionIndex = 0;
             score = 0;

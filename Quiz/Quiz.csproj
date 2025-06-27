@@ -8,4 +8,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="quiz.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="quiz.ico" />
+  </ItemGroup>
+
 </Project>

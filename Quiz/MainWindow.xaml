@@ -6,37 +6,58 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
-        WindowStartupLocation="CenterScreen">
-    <!--Icon="pack://application:,,,/Resources/quiz_icon.ico">-->
+        WindowStartupLocation="CenterScreen"
+        Icon="/quiz.ico">
 
-    <Border Background="#1E1E2F" CornerRadius="20" BorderBrush="#444" BorderThickness="1" SnapsToDevicePixels="True">
-        <Grid>
-            <Rectangle Fill="#99000000"/>
+    <Grid>
+        <Border Background="{StaticResource MainBackgroundBrush}"
+                CornerRadius="20"
+                BorderBrush="{StaticResource BorderBrushColor}"
+                BorderThickness="1"
+                SnapsToDevicePixels="True"/>
 
-            <DockPanel Height="40" LastChildFill="False" Background="#222" VerticalAlignment="Top"
-                       MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+        <Rectangle Fill="{StaticResource OverlayBrush}"/>
 
-                <TextBlock Text="Quiz Game" Foreground="White" VerticalAlignment="Center" Margin="10,0" FontSize="16" />
+        <DockPanel Height="40" LastChildFill="False" Background="{StaticResource TitleBarBackground}" VerticalAlignment="Top"
+                   MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
 
-                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
-                    <Button Content="—" Click="Minimize_Click" Style="{StaticResource WindowButtonStyle}" ToolTip="Свернуть" />
-                    <Button Content="❐" Click="Maximize_Click" Style="{StaticResource WindowButtonStyle}" ToolTip="Развернуть" />
-                    <Button Content="✕" Click="Close_Click" Style="{StaticResource WindowButtonStyle}" ToolTip="Закрыть" />
-                </StackPanel>
-            </DockPanel>
+            <TextBlock Text="Quiz Game" Style="{StaticResource TitleBarTextStyle}" />
 
-            <Border Background="#AA1E1E2F" CornerRadius="15" Padding="20" Margin="40,80,40,40">
-                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="500">
-                    <TextBlock Text="Выберите категорию викторины" 
-                               FontSize="28" FontWeight="Bold" Foreground="White" 
-                               TextAlignment="Center" Margin="0 0 0 30"/>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                <Button Content="—" Click="Minimize_Click" Style="{StaticResource WindowButtonStyle}"/>
+                <Button Content="❐" Click="Maximize_Click" Style="{StaticResource WindowButtonStyle}"/>
+                <Button Content="✕" Click="Close_Click" Style="{StaticResource WindowButtonStyle}"/>
+            </StackPanel>
+        </DockPanel>
 
-                    <Button Content="Общее" Click="CategoryButton_Click" Style="{StaticResource QuizButtonStyle}" />
-                    <Button Content="IT" Click="CategoryButton_Click" Style="{StaticResource QuizButtonStyle}" />
-                    <Button Content="Математика" Click="CategoryButton_Click" Style="{StaticResource QuizButtonStyle}" />
-                </StackPanel>
-            </Border>
+        <Border x:Name="CategoryPanel" Background="{StaticResource CategoryPanelBackground}" CornerRadius="15" Padding="20" Margin="40,80,40,40">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="500">
+                <TextBlock Text="Выберите категорию викторины" Style="{StaticResource HeaderTextStyle}" />
 
-        </Grid>
-    </Border>
+                <Button Content="Общее" Click="CategoryButton_Click" Style="{StaticResource QuizButtonStyle}" />
+                <Button Content="IT" Click="CategoryButton_Click" Style="{StaticResource QuizButtonStyle}" />
+                <Button Content="Математика" Click="CategoryButton_Click" Style="{StaticResource QuizButtonStyle}" />
+            </StackPanel>
+        </Border>
+
+        <StackPanel x:Name="QuizPanel"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Width="500"
+                    Visibility="Collapsed">
+
+            <TextBlock x:Name="QuestionText" Style="{StaticResource QuestionTextStyle}" />
+
+            <Button x:Name="AnswerButton0" Style="{StaticResource QuizButtonStyle}" Click="AnswerButton_Click" />
+            <Button x:Name="AnswerButton1" Style="{StaticResource QuizButtonStyle}" Click="AnswerButton_Click" />
+            <Button x:Name="AnswerButton2" Style="{StaticResource QuizButtonStyle}" Click="AnswerButton_Click" />
+            <Button x:Name="AnswerButton3" Style="{StaticResource QuizButtonStyle}" Click="AnswerButton_Click" />
+
+            <TextBlock x:Name="FeedbackText" Style="{StaticResource FeedbackTextStyle}" />
+            <TextBlock x:Name="ScoreText" Style="{StaticResource ScoreTextStyle}" />
+
+            <Button x:Name="NextButton" Content="Следующий вопрос" Style="{StaticResource QuizButtonStyle}" Visibility="Collapsed" Click="NextButton_Click" />
+            <Button x:Name="RestartButton" Content="В начало" Style="{StaticResource QuizButtonStyle}" Visibility="Collapsed" Click="RestartButton_Click" />
+        </StackPanel>
+    </Grid>
 </Window>
